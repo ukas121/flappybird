@@ -23,7 +23,7 @@ const Floor = props => {
       }}>
       {/* Render the floor image */}
       <Image
-        source={require('../assets/tile2.png')} // Replace with your image path
+        source={require('../assets/grass.png')} // Replace with your image path
         style={{ flex: 1, width: '100%', height: '50%' }}
         resizeMode="cover"
       />

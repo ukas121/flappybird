@@ -11,6 +11,7 @@ export default function App() {
   const [gameEngine, setGameEngine] = useState(null);
   const [currentPoints, setCurrentPoints] = useState(0);
   const [soundObject, setSoundObject] = useState(null);
+  const [paused, setPaused] = useState(false); // State to manage pause/unpause
 
   useEffect(() => {
     setRunning(false);
@@ -51,10 +52,26 @@ export default function App() {
     };
   }, [soundObject]);
 
+  const handlePause = () => {
+    setRunning(false);
+    gameEngine && gameEngine.stop();
+    stopSound();
+    setPaused(true); // Set paused state to true when paused
+  };
+
+  const handleResume = () => {
+    setRunning(true); // Set running state back to true to resume the game
+    setPaused(false); // Set paused state back to false
+    playSound(); // Resume playing sound
+  };
+
   return (
-    <ImageBackground source={require('./assets/allbackgroundstars.png')} style={{ flex: 1 }}>
+    <ImageBackground source={require('./assets/forest.png')} style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <StatusBar style="auto" hidden={true} />
+        {running ? null : ( // Render "Game Over" text when the game ends
+          <Text style={{ textAlign: 'center', fontSize: 40, fontWeight: 'bold', margin: 20, color: 'white' }}>Game Over!</Text>
+        )}
         <Text style={{ textAlign: 'center', fontSize: 40, fontWeight: 'bold', margin: 20, color: 'white' }}>{currentPoints}</Text>
         <GameEngine
           ref={(ref) => { setGameEngine(ref) }}
@@ -76,7 +93,7 @@ export default function App() {
           }}
           style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0 }}
         />
-        {!running ?
+        {!running && !paused ? ( // Render "Start Game" button when the game is not running and not paused
           <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <TouchableOpacity style={{ backgroundColor: 'black', paddingHorizontal: 30, paddingVertical: 10 }}
               onPress={() => {
@@ -88,7 +105,24 @@ export default function App() {
                 START GAME
               </Text>
             </TouchableOpacity>
-          </View> : null}
+          </View>
+        ) : (
+          !paused ? ( // Render pause button if game is not paused
+            <TouchableOpacity
+              style={{ position: 'absolute', top: 20, right: 20, backgroundColor: 'black', padding: 10, borderRadius: 5 }}
+              onPress={handlePause}
+            >
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>PAUSE</Text>
+            </TouchableOpacity>
+          ) : ( // Render unpause button if game is paused
+            <TouchableOpacity
+              style={{ position: 'absolute', top: 20, right: 20, backgroundColor: 'black', padding: 10, borderRadius: 5 }}
+              onPress={handleResume}
+            >
+              <Text style={{ color: 'white', fontWeight: 'bold' }}>RESUME</Text>
+            </TouchableOpacity>
+          )
+        )}
       </View>
     </ImageBackground>
   );
