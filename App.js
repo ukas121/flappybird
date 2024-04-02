@@ -66,7 +66,7 @@ export default function App() {
   };
 
   return (
-    <ImageBackground source={require('./assets/forest.png')} style={{ flex: 1 }}>
+    <ImageBackground source={require('./assets/forest2.png')} style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <StatusBar style="auto" hidden={true} />
         {running ? null : ( // Render "Game Over" text when the game ends
