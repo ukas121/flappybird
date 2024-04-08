@@ -125,5 +125,7 @@ export default function App() {
         )}
       </View>
     </ImageBackground>
+    
+    
   );
 }
