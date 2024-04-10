@@ -5,9 +5,6 @@ import { Dimensions } from "react-native";
 const windowHeight = Dimensions.get("window").height;
 const windowWidth = Dimensions.get("window").width;
 
-const POP_DELAY = 1000; // 1 second delay before popping the clouds
-
-const safeMargin = 500; // Adjust as needed to ensure clouds don't spawn too close to the floor
 
 const Physics = (entities, { touches, time, dispatch }) => {
   let engine = entities.physics.engine;
@@ -57,17 +54,18 @@ const Physics = (entities, { touches, time, dispatch }) => {
       y: 0,
     });
 
-    // Check if the clouds have hit the screen border
-    if (entities[`Clouds${index}`]) {
-      const cloudBody = entities[`Clouds${index}`].body;
-      if (cloudBody.bounds.min.x < 0) {
-        // Set a timer to pop the clouds after the delay
-        setTimeout(() => {
-          Matter.World.remove(engine.world, cloudBody);
-          delete entities[`Clouds${index}`];
-        }, POP_DELAY);
-      }
-    }
+// Check if the clouds have hit the screen border
+if (entities[`Clouds${index}`]) {
+  const cloudBody = entities[`Clouds${index}`].body;
+  if (cloudBody.bounds.min.x <= -cloudBody.width) {
+    // Set a timer to remove the clouds after they hit the left screen border
+    setTimeout(() => {
+      Matter.World.remove(engine.world, cloudBody);
+      delete entities[`Clouds${index}`];
+    }, POP_DELAY);
+  }
+}
+
   }
 
   // Handle collisions
@@ -90,7 +88,7 @@ const Physics = (entities, { touches, time, dispatch }) => {
 
   // Update cloud positions
   for (let index = 1; index <= 4; index++) {
-    const cloudEntity = entities[`Clouds${index}`]; // Use 'Clouds' instead of 'Cloud'
+    const cloudEntity = entities[`Clouds${index}`]; 
     if (cloudEntity) {
       const cloudBody = cloudEntity.body;
       // Move clouds horizontally with a constant velocity
@@ -103,13 +101,14 @@ const Physics = (entities, { touches, time, dispatch }) => {
       );
       cloudEntity.opacity = cloudOpacity;
 
-      // Check if the cloud has moved out of the screen
-      if (cloudBody.bounds.min.x < 0) {
-        // Reset cloud position to the right side of the screen
-        Matter.Body.setPosition(cloudBody, {
-          x: windowWidth + cloudBody.bounds.max.x - cloudBody.bounds.min.x,
-          y: Math.random() * (windowHeight - safeMargin) + safeMargin / 2, // Adjusted random y-position
-        });
+// Check if the cloud has moved out of the screen
+if (cloudBody.bounds.max.x < 0) {
+  // Reset cloud position to the right side of the screen above 300 pixels
+  Matter.Body.setPosition(cloudBody, {
+    x: windowWidth + cloudBody.bounds.max.x - cloudBody.bounds.min.x,
+    y: Math.max(300, Math.random() * windowHeight), // Ensure y-position is above 300 pixels
+  });
+
       }
     }
   }

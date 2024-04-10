@@ -21,10 +21,10 @@ const Floor = props => {
         width: widthBody,
         height: heightBody,
       }}>
-      {/* Render the floor image */}
+      {/* Render the floor GIF */}
       <Image
-        source={require('../assets/tilesetgrassdark.png')} // Replace with your image path
-        style={{ flex: 1, width: '100%', height: '100%' }}
+        source={require('../assets/ruoho3.gif')} // Replace with the path to your GIF
+        style={{ flex: 1, width: '115%', height: '100%' }}
         resizeMode="cover"
       />
     </View>
