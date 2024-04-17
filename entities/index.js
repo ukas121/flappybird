@@ -4,6 +4,7 @@ import Floor from "../components/Floor";
 import Obstacle from "../components/Obstacle";
 import Clouds from "../components/Clouds";
 
+
 import { Dimensions } from 'react-native';
 import { getPipeSizePosPair } from "../utils/random";
 

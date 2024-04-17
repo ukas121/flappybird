@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Text, TouchableOpacity, View, ImageBackground, Alert, Switch } from "react-native";
+import { Text, TouchableOpacity, View, ImageBackground, Alert, Switch, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { GameEngine } from "react-native-game-engine";
 import entities from "./entities";
@@ -9,7 +9,6 @@ import { BackHandler } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FontAwesome6 } from '@expo/vector-icons';
 import styles from './styles/style'; // Import styles from styles.js
-
 
 export default function App() {
   const [running, setRunning] = useState(false);
@@ -137,7 +136,7 @@ export default function App() {
 
   return (
     <ImageBackground
-      source={require("./assets/night45.png")}
+      source={require("./assets/night455.png")}
       style={{ flex: 1 }}
     >
       <View style={{ flex: 1 }}>
@@ -172,6 +171,7 @@ export default function App() {
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
+            <Image source={require("./assets/shroomlogo.png")} style={{width: 600, height: 250, marginBottom: -70   }} />
             <TouchableOpacity
               style={[styles.button, { marginBottom: 10 }]}
               onPress={() => {
