@@ -19,13 +19,13 @@ const Obstacle = props => {
         top: yBody,
         width: widthBody,
         height: heightBody,
-        overflow: 'hidden', // Ensure rounded corners are applied correctly
+        overflow: 'hidden', 
         borderRadius: 10, 
       }}>
       {/* Render the obstacle image */}
       <Image
-        source={require('../assets/tile24.png')} // image path
-        style={{ flex: 1, width: '100%', height: '100%', borderRadius: 10 }} // Apply borderRadius to the Image
+        source={require('../assets/tile24.png')} 
+        style={{ flex: 1, width: '100%', height: '100%', borderRadius: 10 }} 
         resizeMode="cover"
       />
     </View>
@@ -34,13 +34,13 @@ const Obstacle = props => {
 
 export default (world, label, color, pos, size) => {
   const { width, height } = size;
-  const cornerRadius = 10; // Adjust this value to match the rounded corners
+  const cornerRadius = 10; 
 
-  // Calculate the adjusted hitbox dimensions
+ 
   const adjustedWidth = width - 2 * cornerRadius;
   const adjustedHeight = height - 2 * cornerRadius;
 
-  // Create the Matter.js body with the adjusted hitbox
+  
   const initialObstacle = Matter.Bodies.rectangle(
     pos.x, 
     pos.y, 
@@ -49,7 +49,7 @@ export default (world, label, color, pos, size) => {
     {
       label,
       isStatic: true,
-      chamfer: { radius: cornerRadius } // Add chamfer to round the corners
+      chamfer: { radius: cornerRadius } 
     }
   );
 
