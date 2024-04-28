@@ -22,7 +22,7 @@ const Clouds = (props) => {
     >
       {/* Render the cloud image */}
       <Image
-        source={getImageSource(props.imageIndex)} // Function to get image source based on imageIndex
+        source={getImageSource(props.imageIndex)} 
         style={{ flex: 1, width: "100%", height: "80%" }}
         resizeMode="cover"
       />
@@ -30,7 +30,7 @@ const Clouds = (props) => {
   );
 };
 
-// Function to get image source based on imageIndex
+
 const getImageSource = (imageIndex) => {
   switch (imageIndex) {
     case 1:
@@ -65,6 +65,6 @@ export default (world, label, pos, size, imageIndex) => {
     body: initialCloud,
     pos,
     imageIndex,
-    renderer: <Clouds imageIndex={imageIndex} />, // Pass imageIndex as prop to Clouds component
+    renderer: <Clouds imageIndex={imageIndex} />, 
   };
 };

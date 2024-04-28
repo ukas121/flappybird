@@ -9,7 +9,7 @@ const windowWidth = Dimensions.get("window").width;
 const Physics = (entities, { touches, time, dispatch }) => {
   let engine = entities.physics.engine;
 
-  // Handle touches
+  
   touches
     .filter((t) => t.type === "press")
     .forEach((t) => {
@@ -19,10 +19,10 @@ const Physics = (entities, { touches, time, dispatch }) => {
       });
     });
 
-  // Update engine
+ 
   Matter.Engine.update(engine, time.delta);
 
-  // Update obstacles
+  
   for (let index = 1; index <= 2; index++) {
     if (
       entities[`ObstacleTop${index}`].body.bounds.max.x <= 50 &&
@@ -94,7 +94,7 @@ if (entities[`Clouds${index}`]) {
       // Move clouds horizontally with a constant velocity
       Matter.Body.translate(cloudBody, { x: -1, y: 0 });
 
-      // Gradually reduce opacity as the cloud approaches the edge of the screen
+      
       const cloudOpacity = Math.max(
         0,
         1 - (windowWidth - cloudBody.position.x) / (windowWidth / 2)

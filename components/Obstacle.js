@@ -24,7 +24,7 @@ const Obstacle = props => {
       }}>
       {/* Render the obstacle image */}
       <Image
-        source={require('../assets/tile23.png')} // image path
+        source={require('../assets/tile24.png')} // image path
         style={{ flex: 1, width: '100%', height: '100%', borderRadius: 10 }} // Apply borderRadius to the Image
         resizeMode="cover"
       />

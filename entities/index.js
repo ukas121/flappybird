@@ -11,8 +11,8 @@ import { getPipeSizePosPair } from "../utils/random";
 const windowHeight = Dimensions.get('window').height;
 const windowWidth = Dimensions.get('window').width;
 
-// Define a safe margin from the floor for cloud spawning
-const safeMargin = 100; // Adjust as needed
+
+const safeMargin = 100; 
 
 export default restart => {
     let engine = Matter.Engine.create({ enableSleeping: false });
@@ -26,7 +26,7 @@ export default restart => {
         physics: { engine, world },
       
 
-        // Define cloud positions with adjusted y-coordinates to avoid spawning near the floor
+       
         Clouds1: Clouds(world, 'Clouds1', { x: windowWidth / 4, y: Math.random() * (windowHeight - safeMargin) + safeMargin / 2 }, { height: 40, width: 80 }, 1),
         Clouds2: Clouds(world, 'Clouds2', { x: windowWidth / 2, y: Math.random() * (windowHeight - safeMargin) + safeMargin / 2 }, { height: 50, width: 120 }, 2),
         Clouds3: Clouds(world, 'Clouds3', { x: windowWidth * 0.75, y: Math.random() * (windowHeight - safeMargin) + safeMargin / 2 }, { height: 50, width: 120 }, 3),
