@@ -21,7 +21,6 @@ const Floor = props => {
         width: widthBody,
         height: heightBody,
       }}>
-      {/* Render the floor GIF */}
       <Image
         source={require('../assets/tilesetgrassdark.png')} 
         style={{ flex: 1, width: '115%', height: '100%' }}
